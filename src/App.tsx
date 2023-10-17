@@ -1,52 +1,382 @@
 import logo_seice from "./assets/logo_seice.png"
-import { Menu, Search } from "lucide-react"
+import { Download, Menu, Save, Search, Trash2 } from "lucide-react"
 
 import currentAlumnPhoto from "./assets/foto_aluno.jpg"
 import trequinhoPhoto from "./assets/trequinho.svg"
+import { useState } from "react";
 
 interface Aluno {
-  nome: string,
-  matricula: number,
-  turma: string,
-  professora: string,
-  relatorioDescritivo: string,
-  // AVALIAÇÃO DOS ASPECTOS PSICOMOTORES, SOCIAIS E COMPORTAMENTAIS
-  AAPSC: [
-    {}
-  ]
+  nome: string;
+  matricula: number;
+  turma: string;
+  professora: string;
 
+  // Campos das tabelas de avaliação dos aspectos psicomotores, sociais e comportamentais
+  aspectosAvaliados: {
+    "1B": {
+      aprendeComFacilidade: string;
+      demonstraInteresseAtividades: string;
+      realizaAtividadesAula: string;
+      realizaAtividadesCasa: string;
+      apresentaDificuldadeCoordenacao: string;
+      manejaMaterialArtes: string;
+      pronunciaPalavrasDificuldades: string;
+      apresentaDificuldadeEnxergar: string;
+      apresentaDificuldadeAudição: string;
+      manifestaTimidez: string;
+      participaBrincadeiras: string;
+      partilhaObjetosBoaVontade: string;
+      pedeSempreAjuda: string;
+      choraComFrequencia: string;
+      respeitaProfessores: string;
+      demonstraAgressividade: string;
+      fazGestosObscenos: string;
+      cuidaBemMateriais: string;
+      mantemHigieneEscola: string;
+      frequentaAssiduamenteAulas: string;
+      usaUniforme: string;
+      cumpreHorariosEscola: string;
+    };
+    "2B": {
+      aprendeComFacilidade: string;
+      demonstraInteresseAtividades: string;
+      realizaAtividadesAula: string;
+      realizaAtividadesCasa: string;
+      apresentaDificuldadeCoordenacao: string;
+      manejaMaterialArtes: string;
+      pronunciaPalavrasDificuldades: string;
+      apresentaDificuldadeEnxergar: string;
+      apresentaDificuldadeAudição: string;
+      manifestaTimidez: string;
+      participaBrincadeiras: string;
+      partilhaObjetosBoaVontade: string;
+      pedeSempreAjuda: string;
+      choraComFrequencia: string;
+      respeitaProfessores: string;
+      demonstraAgressividade: string;
+      fazGestosObscenos: string;
+      cuidaBemMateriais: string;
+      mantemHigieneEscola: string;
+      frequentaAssiduamenteAulas: string;
+      usaUniforme: string;
+      cumpreHorariosEscola: string;
+    };
+    "3B": {
+      aprendeComFacilidade: string;
+      demonstraInteresseAtividades: string;
+      realizaAtividadesAula: string;
+      realizaAtividadesCasa: string;
+      apresentaDificuldadeCoordenacao: string;
+      manejaMaterialArtes: string;
+      pronunciaPalavrasDificuldades: string;
+      apresentaDificuldadeEnxergar: string;
+      apresentaDificuldadeAudição: string;
+      manifestaTimidez: string;
+      participaBrincadeiras: string;
+      partilhaObjetosBoaVontade: string;
+      pedeSempreAjuda: string;
+      choraComFrequencia: string;
+      respeitaProfessores: string;
+      demonstraAgressividade: string;
+      fazGestosObscenos: string;
+      cuidaBemMateriais: string;
+      mantemHigieneEscola: string;
+      frequentaAssiduamenteAulas: string;
+      usaUniforme: string;
+      cumpreHorariosEscola: string;
+    };
+    "4B": {
+      aprendeComFacilidade: string;
+      demonstraInteresseAtividades: string;
+      realizaAtividadesAula: string;
+      realizaAtividadesCasa: string;
+      apresentaDificuldadeCoordenacao: string;
+      manejaMaterialArtes: string;
+      pronunciaPalavrasDificuldades: string;
+      apresentaDificuldadeEnxergar: string;
+      apresentaDificuldadeAudição: string;
+      manifestaTimidez: string;
+      participaBrincadeiras: string;
+      partilhaObjetosBoaVontade: string;
+      pedeSempreAjuda: string;
+      choraComFrequencia: string;
+      respeitaProfessores: string;
+      demonstraAgressividade: string;
+      fazGestosObscenos: string;
+      cuidaBemMateriais: string;
+      mantemHigieneEscola: string;
+      frequentaAssiduamenteAulas: string;
+      usaUniforme: string;
+      cumpreHorariosEscola: string;
+    };
+  };
+
+  // Campos da tabela de rendimento das avaliações
+  rendimentoAvaliacoes: {
+    "1B": {
+      portugues: string;
+      matematica: string;
+      ciencias: string;
+      sociedade: string;
+      edArtistica: string;
+      leitura: string;
+      ingles: string;
+      recreacao: string;
+      comportamento: string;
+      faltas: string;
+      media: string;
+    };
+    "2B": {
+      portugues: string;
+      matematica: string;
+      ciencias: string;
+      sociedade: string;
+      edArtistica: string;
+      leitura: string;
+      ingles: string;
+      recreacao: string;
+      comportamento: string;
+      faltas: string;
+      media: string;
+    };
+    "3B": {
+      portugues: string;
+      matematica: string;
+      ciencias: string;
+      sociedade: string;
+      edArtistica: string;
+      leitura: string;
+      ingles: string;
+      recreacao: string;
+      comportamento: string;
+      faltas: string;
+      media: string;
+    };
+    "4B": {
+      portugues: string;
+      matematica: string;
+      ciencias: string;
+      sociedade: string;
+      edArtistica: string;
+      leitura: string;
+      ingles: string;
+      recreacao: string;
+      comportamento: string;
+      faltas: string;
+      media: string;
+    };
+  };
+
+  // Campo do relatório descritivo
+  relatorioDescritivo: string;
+
+  // Assinaturas
+  assinaturaProfessor: string;
+  assinaturaCoordenador: string;
 }
+
 
 export default function App() {
 
-  function getAlumn() {
-    return {
-      nome: "Joaquim",
-      matricula: 1,
-      turma: "301",
-      professora: "Luana Máximo",
-      B1: ["S", "N", "AV", "NO"],
-      B2: ["S", "N", "AV", "NO"],
-      B3: ["S", "N", "AV", "NO"],
-      B4: ["S", "N", "AV", "NO"],
-    }
+  const [alunoData, setAlunoData] = useState<Aluno>({
+    nome: "",
+    matricula: 0,
+    turma: "",
+    professora: "",
+    aspectosAvaliados: {
+      "1B": {
+        aprendeComFacilidade: "",
+        demonstraInteresseAtividades: "",
+        realizaAtividadesAula: "",
+        realizaAtividadesCasa: "",
+        apresentaDificuldadeCoordenacao: "",
+        manejaMaterialArtes: "",
+        pronunciaPalavrasDificuldades: "",
+        apresentaDificuldadeEnxergar: "",
+        apresentaDificuldadeAudição: "",
+        manifestaTimidez: "",
+        participaBrincadeiras: "",
+        partilhaObjetosBoaVontade: "",
+        pedeSempreAjuda: "",
+        choraComFrequencia: "",
+        respeitaProfessores: "",
+        demonstraAgressividade: "",
+        fazGestosObscenos: "",
+        cuidaBemMateriais: "",
+        mantemHigieneEscola: "",
+        frequentaAssiduamenteAulas: "",
+        usaUniforme: "",
+        cumpreHorariosEscola: ""
+      },
+      "2B": {
+        aprendeComFacilidade: "",
+        demonstraInteresseAtividades: "",
+        realizaAtividadesAula: "",
+        realizaAtividadesCasa: "",
+        apresentaDificuldadeCoordenacao: "",
+        manejaMaterialArtes: "",
+        pronunciaPalavrasDificuldades: "",
+        apresentaDificuldadeEnxergar: "",
+        apresentaDificuldadeAudição: "",
+        manifestaTimidez: "",
+        participaBrincadeiras: "",
+        partilhaObjetosBoaVontade: "",
+        pedeSempreAjuda: "",
+        choraComFrequencia: "",
+        respeitaProfessores: "",
+        demonstraAgressividade: "",
+        fazGestosObscenos: "",
+        cuidaBemMateriais: "",
+        mantemHigieneEscola: "",
+        frequentaAssiduamenteAulas: "",
+        usaUniforme: "",
+        cumpreHorariosEscola: ""
+      },
+      "3B": {
+        aprendeComFacilidade: "",
+        demonstraInteresseAtividades: "",
+        realizaAtividadesAula: "",
+        realizaAtividadesCasa: "",
+        apresentaDificuldadeCoordenacao: "",
+        manejaMaterialArtes: "",
+        pronunciaPalavrasDificuldades: "",
+        apresentaDificuldadeEnxergar: "",
+        apresentaDificuldadeAudição: "",
+        manifestaTimidez: "",
+        participaBrincadeiras: "",
+        partilhaObjetosBoaVontade: "",
+        pedeSempreAjuda: "",
+        choraComFrequencia: "",
+        respeitaProfessores: "",
+        demonstraAgressividade: "",
+        fazGestosObscenos: "",
+        cuidaBemMateriais: "",
+        mantemHigieneEscola: "",
+        frequentaAssiduamenteAulas: "",
+        usaUniforme: "",
+        cumpreHorariosEscola: ""
+      },
+      "4B": {
+        aprendeComFacilidade: "",
+        demonstraInteresseAtividades: "",
+        realizaAtividadesAula: "",
+        realizaAtividadesCasa: "",
+        apresentaDificuldadeCoordenacao: "",
+        manejaMaterialArtes: "",
+        pronunciaPalavrasDificuldades: "",
+        apresentaDificuldadeEnxergar: "",
+        apresentaDificuldadeAudição: "",
+        manifestaTimidez: "",
+        participaBrincadeiras: "",
+        partilhaObjetosBoaVontade: "",
+        pedeSempreAjuda: "",
+        choraComFrequencia: "",
+        respeitaProfessores: "",
+        demonstraAgressividade: "",
+        fazGestosObscenos: "",
+        cuidaBemMateriais: "",
+        mantemHigieneEscola: "",
+        frequentaAssiduamenteAulas: "",
+        usaUniforme: "",
+        cumpreHorariosEscola: ""
+      }
+    },
+    rendimentoAvaliacoes: {
+      "1B": {
+        portugues: "",
+        matematica: "",
+        ciencias: "",
+        sociedade: "",
+        edArtistica: "",
+        leitura: "",
+        ingles: "",
+        recreacao: "",
+        comportamento: "",
+        faltas: "",
+        media: ""
+      },
+      "2B": {
+        portugues: "",
+        matematica: "",
+        ciencias: "",
+        sociedade: "",
+        edArtistica: "",
+        leitura: "",
+        ingles: "",
+        recreacao: "",
+        comportamento: "",
+        faltas: "",
+        media: ""
+      },
+      "3B": {
+        portugues: "",
+        matematica: "",
+        ciencias: "",
+        sociedade: "",
+        edArtistica: "",
+        leitura: "",
+        ingles: "",
+        recreacao: "",
+        comportamento: "",
+        faltas: "",
+        media: ""
+      },
+      "4B": {
+        portugues: "",
+        matematica: "",
+        ciencias: "",
+        sociedade: "",
+        edArtistica: "",
+        leitura: "",
+        ingles: "",
+        recreacao: "",
+        comportamento: "",
+        faltas: "",
+        media: ""
+      }
+    },
+    relatorioDescritivo: "",
+    assinaturaProfessor: "",
+    assinaturaCoordenador: ""
+  });
+
+  function handleInputChange(event: any) {
+    const { name, value } = event.target
+
+    setAlunoData({
+      ...alunoData,
+      [name]: value
+    })
   }
 
-  function saveAlumn() {
-    //lógica pra salvar o aluno
+  function getAlumn(e?: any, nome?: string) {
+    //logica para obter o aluno pelo nome
+  }
+
+  function saveAlumn(e?: any, nome?: string) {
+    //lógica pra salvar ou atualizar o aluno onde o nome for respectivo
     alert("Salvo!")
   }
-  function deleteAlumn() {
+  function deleteAlumn(e?: any, nome?: string) {
     //logica pra deletar o aluno
     alert("Deletado!")
   }
+  function imprimir() {
+    // Exiba uma mensagem para o usuário sobre como ajustar a escala de impressão
+    alert('Antes de imprimir, verifique as configurações de escala nas opções avançadas de impressão do seu navegador. Use de preferência, a escala 70.');
+
+    // Abra a janela de impressão
+    window.print();
+
+  }
+
 
   return (
     <>
       <header className="flex flex-col justify-center items-start w-full min-h-[13rem] relative">
         <div className="flex justify-between items-center w-full mt-6 m-2">
-          <img src={currentAlumnPhoto} alt="Foto do aluno atual" className="w-24 absolute top-8 right-12" />
-          <img src={logo_seice} alt="Logo seice" className="w-48 absolute top-8 left-12" />
+          <img src={currentAlumnPhoto} alt="Foto do aluno atual" className="w-24 absolute top-8 right-12 print:w-24 print:top-2 print:right-1" />
+          <img src={logo_seice} alt="Logo seice" className="w-48 absolute top-[5%] left-[2%] print:w-36 print:top-2 print:left-1" />
           <div className="flex flex-col gap-2 items-center justify-center w-full">
             <h1 className="text-2xl font-bold">SEICE - Sistema de Ensino Integrado de Campos Elíseos</h1>
             <h2 className="text-lg font-bold">Acompanhamento Infantil</h2>
@@ -59,7 +389,7 @@ export default function App() {
               <label className="text-lg font-bold" htmlFor="nome-aluno">Aluno:</label>
               <div className="w-8/12 flex items-center">
                 <input type="text" id="nome-aluno" className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-full" placeholder="Nome do Aluno" />
-                <button className="p-2 rounded hover:bg-slate-300 transition-colors"><Search /></button>
+                <button className="ml-2 p-2 rounded hover:bg-slate-300 transition-colors print:hidden" title="Buscar Aluno"><Search /></button>
               </div>
             </div>
             <div className="flex items-center gap-8 p-2 w-full">
@@ -80,10 +410,10 @@ export default function App() {
           </div>
         </div>
       </header>
-      <main className="w-full my-16 space-y-16">
+      <main className="w-full my-16 space-y-14">
         <section>
           <SectionTitle>AVALIAÇÃO DOS ASPECTOS PSICOMOTORES, SOCIAIS E COMPORTAMENTAIS</SectionTitle>
-          <table className="mx-auto w-1/2 border-collapse border-black border mt-10">
+          <table className="mx-auto w-3/4 border-collapse border-black border mt-10">
             <thead>
               <Th>ASPECTOS A SEREM AVALIADOS</Th>
               <Th>1B</Th>
@@ -94,73 +424,73 @@ export default function App() {
             <tbody>
               <tr>
                 <Th2>1- APRENDE COM FACILIDADE</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.aprendeComFacilidade" id="aspectosAvaliados.1B.aprendeComFacilidade"></Td>
+                <Td name="aspectosAvaliados.2B.aprendeComFacilidade" id="aspectosAvaliados.2B.aprendeComFacilidade"></Td>
+                <Td name="aspectosAvaliados.3B.aprendeComFacilidade" id="aspectosAvaliados.3B.aprendeComFacilidade"></Td>
+                <Td name="aspectosAvaliados.4B.aprendeComFacilidade" id="aspectosAvaliados.4B.aprendeComFacilidade"></Td>
               </tr>
               <tr>
                 <Th2>2- DEMONSTRA INTERESSE PELAS ATIVIDADES.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.demonstraInteressePelasAtividades" id="aspectosAvaliados.1B.demonstraInteressePelasAtividades"></Td>
+                <Td name="aspectosAvaliados.2B.demonstraInteressePelasAtividades" id="aspectosAvaliados.2B.demonstraInteressePelasAtividades"></Td>
+                <Td name="aspectosAvaliados.3B.demonstraInteressePelasAtividades" id="aspectosAvaliados.3B.demonstraInteressePelasAtividades"></Td>
+                <Td name="aspectosAvaliados.4B.demonstraInteressePelasAtividades" id="aspectosAvaliados.4B.demonstraInteressePelasAtividades"></Td>
               </tr>
               <tr>
                 <Th2>3- REALIZA AS ATIVIDADES DE AULA.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.realizaAtividadesAula" id="aspectosAvaliados.1B.realizaAtividadesAula"></Td>
+                <Td name="aspectosAvaliados.2B.realizaAtividadesAula" id="aspectosAvaliados.2B.realizaAtividadesAula"></Td>
+                <Td name="aspectosAvaliados.3B.realizaAtividadesAula" id="aspectosAvaliados.3B.realizaAtividadesAula"></Td>
+                <Td name="aspectosAvaliados.4B.realizaAtividadesAula" id="aspectosAvaliados.4B.realizaAtividadesAula"></Td>
               </tr>
               <tr>
                 <Th2>4- REALIZA AS ATIVIDADES DE CASA.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.realizaAtividadesCasa" id="aspectosAvaliados.1B.realizaAtividadesCasa"></Td>
+                <Td name="aspectosAvaliados.2B.realizaAtividadesCasa" id="aspectosAvaliados.2B.realizaAtividadesCasa"></Td>
+                <Td name="aspectosAvaliados.3B.realizaAtividadesCasa" id="aspectosAvaliados.3B.realizaAtividadesCasa"></Td>
+                <Td name="aspectosAvaliados.4B.realizaAtividadesCasa" id="aspectosAvaliados.4B.realizaAtividadesCasa"></Td>
               </tr>
               <tr>
                 <Th2>5- APRESENTA ALGUMA DIFICULDADE PARA CÓPIAS OU COORDENAÇÕES.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.apresentaDificuldadeCoordenacao" id="aspectosAvaliados.1B.apresentaDificuldadeCoordenacao"></Td>
+                <Td name="aspectosAvaliados.2B.apresentaDificuldadeCoordenacao" id="aspectosAvaliados.2B.apresentaDificuldadeCoordenacao"></Td>
+                <Td name="aspectosAvaliados.3B.apresentaDificuldadeCoordenacao" id="aspectosAvaliados.3B.apresentaDificuldadeCoordenacao"></Td>
+                <Td name="aspectosAvaliados.4B.apresentaDificuldadeCoordenacao" id="aspectosAvaliados.4B.apresentaDificuldadeCoordenacao"></Td>
               </tr>
               <tr>
                 <Th2>6- MANEJA BEM O MATERIAL DE ARTES.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.manejaMaterialArtes" id="aspectosAvaliados.1B.manejaMaterialArtes"></Td>
+                <Td name="aspectosAvaliados.2B.manejaMaterialArtes" id="aspectosAvaliados.2B.manejaMaterialArtes"></Td>
+                <Td name="aspectosAvaliados.3B.manejaMaterialArtes" id="aspectosAvaliados.3B.manejaMaterialArtes"></Td>
+                <Td name="aspectosAvaliados.4B.manejaMaterialArtes" id="aspectosAvaliados.4B.manejaMaterialArtes"></Td>
               </tr>
               <tr>
                 <Th2>7- PRONUNCIA PALAVRAS COM DIFICULDADES.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.pronunciaPalavrasDificuldades" id="aspectosAvaliados.1B.pronunciaPalavrasDificuldades"></Td>
+                <Td name="aspectosAvaliados.2B.pronunciaPalavrasDificuldades" id="aspectosAvaliados.2B.pronunciaPalavrasDificuldades"></Td>
+                <Td name="aspectosAvaliados.3B.pronunciaPalavrasDificuldades" id="aspectosAvaliados.3B.pronunciaPalavrasDificuldades"></Td>
+                <Td name="aspectosAvaliados.4B.pronunciaPalavrasDificuldades" id="aspectosAvaliados.4B.pronunciaPalavrasDificuldades"></Td>
               </tr>
               <tr>
                 <Th2>8- APRESENTA ALGUM TIPO DE DIFICULDADE PARA ENXERGAR.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.apresentaDificuldadeEnxergar" id="aspectosAvaliados.1B.apresentaDificuldadeEnxergar"></Td>
+                <Td name="aspectosAvaliados.2B.apresentaDificuldadeEnxergar" id="aspectosAvaliados.2B.apresentaDificuldadeEnxergar"></Td>
+                <Td name="aspectosAvaliados.3B.apresentaDificuldadeEnxergar" id="aspectosAvaliados.3B.apresentaDificuldadeEnxergar"></Td>
+                <Td name="aspectosAvaliados.4B.apresentaDificuldadeEnxergar" id="aspectosAvaliados.4B.apresentaDificuldadeEnxergar"></Td>
               </tr>
               <tr>
                 <Th2>9- APRESENTA ALGUMA DIFICULDADE DE AUDIÇÃO.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.apresentaDificuldadeAudiça" id="aspectosAvaliados.1B.apresentaDificuldadeAudiça"></Td>
+                <Td name="aspectosAvaliados.2B.apresentaDificuldadeAudiça" id="aspectosAvaliados.2B.apresentaDificuldadeAudiça"></Td>
+                <Td name="aspectosAvaliados.3B.apresentaDificuldadeAudiça" id="aspectosAvaliados.3B.apresentaDificuldadeAudiça"></Td>
+                <Td name="aspectosAvaliados.4B.apresentaDificuldadeAudiça" id="aspectosAvaliados.4B.apresentaDificuldadeAudiça"></Td>
               </tr>
               <tr>
                 <Th2>10- MANIFESTA TIMIDEZ.</Th2>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
-                <Td></Td>
+                <Td name="aspectosAvaliados.1B.manifestaTimidez" id="aspectosAvaliados.1B.manifestaTimidez"></Td>
+                <Td name="aspectosAvaliados.2B.manifestaTimidez" id="aspectosAvaliados.2B.manifestaTimidez"></Td>
+                <Td name="aspectosAvaliados.3B.manifestaTimidez" id="aspectosAvaliados.3B.manifestaTimidez"></Td>
+                <Td name="aspectosAvaliados.4B.manifestaTimidez" id="aspectosAvaliados.4B.manifestaTimidez"></Td>
               </tr>
               <tr>
                 <Th2>11- PARTICIPA DAS BRINCADEIRAS.</Th2>
@@ -248,11 +578,11 @@ export default function App() {
               </tr>
             </tbody>
           </table>
-          <div className="w-1/2 mx-auto font-medium text-right">Legenda: S = SIM / N = NÃO / AV = AS VEZES / NO= NÃO OBSERVADO</div>
+          <div className="w-3/4 mx-auto font-medium text-right">Legenda: Não Obs. = NÃO OBSERVADO</div>
         </section>
         <section>
           <SectionTitle>RENDIMENTO DAS AVALIAÇÕES</SectionTitle>
-          <table className="mx-auto w-1/2 border-collapse border-black border mt-10">
+          <table className="mx-auto w-3/4 border-collapse border-black border mt-10">
             <thead>
               <Th>DISCIPLINAS</Th>
               <Th>1º Bimestre</Th>
@@ -345,7 +675,7 @@ export default function App() {
 
             </tbody>
           </table>
-          <div className="w-1/2 mx-auto font-medium text-right">Legenda: PM = PRECISA MELHORAR</div>
+          <div className="w-3/4 mx-auto font-medium text-right">Legenda: P.M. = PRECISA MELHORAR</div>
         </section>
         <section>
           <SectionTitle>RELATÓRIO DESCRITIVO</SectionTitle>
@@ -371,11 +701,12 @@ export default function App() {
 
       </main >
       {/* menuzinho */}
-      <div className="bg-emerald-500 w-20 h-20 rounded-full fixed bottom-4 right-4 flex items-center justify-center group transition-all">
+      <div className="bg-emerald-500 print:hidden w-20 h-20 rounded-full fixed bottom-4 right-4 flex items-center justify-center group transition-all">
         <Menu size={40} fill="#ffffff" />
-        <div className="hidden fixed bottom-4 right-4 flex-col gap-2 items-center justify-center bg-white border border-slate-500 rounded-lg w-32 h-40 group-hover:flex transition-all">
-          <button className="text-white bg-emerald-500 w-10/12 p-1 rounded" onClick={saveAlumn}>Salvar</button>
-          <button className="text-white bg-red-500 w-10/12 p-1 rounded" onClick={deleteAlumn}>Descartar</button>
+        <div className="hidden fixed bottom-4 right-4 flex-col gap-2 items-center justify-center bg-white border border-slate-500 rounded-lg w-36 h-40 group-hover:flex transition-all">
+          <button className="text-white bg-emerald-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={saveAlumn}><Save /> <span className="flex-1">Salvar</span></button>
+          <button className="text-white bg-red-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={deleteAlumn}><Trash2 /> <span className="flex-1">Descartar</span></button>
+          <button className="text-white bg-blue-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={imprimir}> <Download /> <span className="flex-1">Imprimir</span></button>
         </div>
       </div>
     </>
@@ -384,7 +715,7 @@ export default function App() {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center text-center gap-2">
       <img width="20" height="40" src={trequinhoPhoto} />
       <h1 className="text-xl font-medium">
         {children}
@@ -416,11 +747,11 @@ interface TdProps {
 function Td({ children, name, id }: TdProps) {
   return (
     <td className="border p-2">
-      <select name={name} id={id}>
-        <option value="S">S</option>
-        <option value="N">N</option>
-        <option value="AV">AV</option>
-        <option value="NO">NO</option>
+      <select className="p-1 border-0" name={name} id={id}>
+        <option value="Não">Não</option>
+        <option value="Sim">Sim</option>
+        <option value="Não Observado">Não Obs.</option>
+        <option value="As Vezes">As Vezes</option>
       </select>
       {children}
     </td>
@@ -430,11 +761,11 @@ function Td({ children, name, id }: TdProps) {
 function Td2({ children, name, id }: TdProps) {
   return (
     <td className="border p-2">
-      <select name={name} id={id}>
-        <option value="otimo">Ótimo</option>
-        <option value="bom">Bom</option>
-        <option value="regular">Regular</option>
-        <option value="precisamelhorar">PM</option>
+      <select className="p-1 border-0" name={name} id={id}>
+        <option value="Ótimo">Ótimo</option>
+        <option value="Bom">Bom</option>
+        <option value="Regular">Regular</option>
+        <option value="Precisa Melhorar">P.M.</option>
       </select>
       {children}
     </td>
