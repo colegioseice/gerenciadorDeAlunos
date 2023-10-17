@@ -1,13 +1,18 @@
 import logo_seice from "./assets/logo_seice.png"
+import { Menu } from "lucide-react"
 
 import currentAlumnPhoto from "./assets/foto_aluno.jpg"
 import trequinhoPhoto from "./assets/trequinho.svg"
 
 export default function App() {
 
+  function saveAlumn() {
+    alert("Salvo!")
+  }
+
   return (
     <>
-      <header className="flex flex-col justify-center items-start w-full min-h-[13rem]relative">
+      <header className="flex flex-col justify-center items-start w-full min-h-[13rem] relative">
         <div className="flex justify-between items-center w-full mt-6 m-2">
           <img src={currentAlumnPhoto} alt="Foto do aluno atual" className="w-24 absolute top-8 right-12" />
           <img src={logo_seice} alt="Logo seice" className="w-48 absolute top-8 left-12" />
@@ -311,24 +316,34 @@ export default function App() {
         <section>
           <SectionTitle>RELATÓRIO DESCRITIVO</SectionTitle>
           <div className="w-9/12 mt-10 mx-auto">
-            <textarea className="w-full border-black border bg-slate-100" name="relatorio-descritivo" id="relatorio-descritivo" cols={30} rows={20} placeholder="1º Bimestre:É uma criança bastante tímida, embora conheça bem os colegas socializa com poucos. Porém  sempre se mostra interessada em participar das atividades. 
-  Em matemática realiza contagem indutiva, identifica os numerais de 0 a 20 relacionando-os com quantidades, assimilou os conceitos estudados como grosso/fino, leve/pesado, pequeno/grande,   muito/pouco com segurança.
-  Já em linguagem acompanha com atenção as contações de histórias, identifica as vogais relacionando-as em palavras no início e no meio delas, os encontros vocálicos e também as famílias silábicas das consoantes b, c, d e f. Frequenta regularmente as aulas e tem um bom comportamento dentro e fora de sala de aula. 
-  Concluo assim que Ana Cecília apresentou um bom rendimento durante o 1° bimestre adquirindo novos conhecimentos podendo dessa forma obter avanços ainda maiores no próximo bimestre.
+            <textarea className="w-full border-black border bg-slate-100" name="relatorio-descritivo" id="relatorio-descritivo" cols={30} rows={20} 
+            placeholder="Descreva aqui o seu relatório..."/>
+          </div>
+          <div className="flex items-center justify-between w-8/12 mx-auto">
+            <div className="flex flex-col items-center justify-between w-1/3">
+              <input type="text" id="assinatura-professora" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black" />
+              <hr className="w-full my-2 border-black" />
+              <label htmlFor="assinatura-professora">Professor</label>
+            </div>
+            <div className="flex flex-col items-center justify-between w-1/3">
+              <input type="text" id="assinatura-coordenador" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black" />
+              <hr className="w-full my-2 border-black" />
+              <label htmlFor="assinatura-coordenador">Coordenador</label>
+            </div>
 
-2° Bimestre: Com base nos objetivos propostos no bimestre, foi possível observar que a aluna apresentou um bom aproveitamento na aquisição dos conteúdos ministrados.
-   Na linguagem oral e escrita, comunica-se bem,  é organizada com suas ideias. É capaz de reconhecer e escrever seu nome e sobrenome, lê e identifica as vogais, consoantes e famílias silábicas estudadas mesmo que apresente as vezes uma insegurança na hora da leitura.
-   Em matemática, conta e enumera os algarismos de 0 a 30, além de compreender os conceitos básicos e fazer continhas de adição. Desta forma pode-se entender que Ana Cecília esta evoluindo bem, agregando conhecimento ao longo das aulas.
-
-3º Bimestre:
-  Ana Cecília tem mostrado um notável progresso em suas habilidades sociais. Ela vem demonstrando empatia e cooperação nas atividades em grupo. Mostra interesse em compartilhar e respeitar o espaço dos colegas, contribuindo positivamente para um ambiente de aprendizado acolhedor. Referente a Linguagem e Comunicação:
- A aluna têm ampliado seu vocabulário, usando frases simples para se expressar e interagir com os outros. Também têm demonstrado interesse em ouvir histórias e conversas, mostrando-se mais envolvidas nas atividades de leitura e contação de histórias. Escreve seu nome e sobrenome, lê as sílabas apresentadas e também palavras simples. Em Matemática: não apresenta dificuldade nos conceitos numéricos básicos (ordem crescente e decrescente) , formas geométricas e sequências. Ela têm demonstrado entusiasmo ao aprender e praticar esses conceitos por meio de jogos e atividades  o que tem contribuído para o desenvolvimento de suas habilidades matemáticas iniciais.
-  Sendo assim é notável o progresso durante seu período escolar."/>
           </div>
 
         </section>
 
       </main >
+      {/* menuzinho */}
+      <div className="bg-emerald-500 w-20 h-20 rounded-full fixed bottom-4 right-4 flex items-center justify-center group transition-all">
+        <Menu size={40} fill="#ffffff" />
+        <div className="hidden fixed bottom-4 right-4 flex-col gap-2 items-center justify-center bg-white border border-slate-500 rounded-lg w-32 h-40 group-hover:flex transition-all">
+          <button className="text-white bg-emerald-500 w-10/12 p-1" onClick={saveAlumn}>Salvar</button>
+          <button className="text-white bg-red-500 w-10/12 p-1" onClick={saveAlumn}>Descartar</button>
+        </div>
+      </div>
     </>
   )
 }
