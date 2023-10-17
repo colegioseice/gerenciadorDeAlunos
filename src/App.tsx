@@ -1,13 +1,44 @@
 import logo_seice from "./assets/logo_seice.png"
-import { Menu } from "lucide-react"
+import { Menu, Search } from "lucide-react"
 
 import currentAlumnPhoto from "./assets/foto_aluno.jpg"
 import trequinhoPhoto from "./assets/trequinho.svg"
 
+interface Aluno {
+  nome: string,
+  matricula: number,
+  turma: string,
+  professora: string,
+  relatorioDescritivo: string,
+  // AVALIAÇÃO DOS ASPECTOS PSICOMOTORES, SOCIAIS E COMPORTAMENTAIS
+  AAPSC: [
+    {}
+  ]
+
+}
+
 export default function App() {
 
+  function getAlumn() {
+    return {
+      nome: "Joaquim",
+      matricula: 1,
+      turma: "301",
+      professora: "Luana Máximo",
+      B1: ["S", "N", "AV", "NO"],
+      B2: ["S", "N", "AV", "NO"],
+      B3: ["S", "N", "AV", "NO"],
+      B4: ["S", "N", "AV", "NO"],
+    }
+  }
+
   function saveAlumn() {
+    //lógica pra salvar o aluno
     alert("Salvo!")
+  }
+  function deleteAlumn() {
+    //logica pra deletar o aluno
+    alert("Deletado!")
   }
 
   return (
@@ -24,23 +55,26 @@ export default function App() {
         </div>
         <div className="flex flex-row w-full px-14 p-4">
           <div className="flex flex-col items-start w-1/2">
-            <div className="flex items-center gap-2 p-2 justify-between w-full">
+            <div className="flex items-center gap-8 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="nome-aluno">Aluno:</label>
-              <input type="text" id="nome-aluno" className="p-1 text-lg text-black placeholder:text-black w-10/12" placeholder="Ana Cecília de Souza da Silva" />
+              <div className="w-8/12 flex items-center">
+                <input type="text" id="nome-aluno" className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-full" placeholder="Nome do Aluno" />
+                <button className="p-2 rounded hover:bg-slate-300 transition-colors"><Search /></button>
+              </div>
             </div>
-            <div className="flex items-center gap-2 p-2 justify-between w-full">
+            <div className="flex items-center gap-8 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="turma-aluno">Turma:</label>
-              <input type="text" id="turma-aluno" className="p-1 text-lg text-black placeholder:text-black w-10/12" placeholder="- (2023) - PRÉ II - MANHÃ 301" />
+              <input type="text" id="turma-aluno" className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-8/12" placeholder="Turma" />
             </div>
           </div>
           <div className="flex flex-col items-start w-1/2">
-            <div className="flex items-end gap-2 p-2 justify-between w-full">
+            <div className="flex items-end gap-8 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="matricula-aluno">N° Matrícula:</label>
-              <input type="number" min={0} id="matricula-aluno" className="p-1 text-lg text-black w-2/4 placeholder:text-black" placeholder="141386950" />
+              <input type="number" min={0} id="matricula-aluno" className="bg-slate-100 rounded p-1 text-lg text-black w-2/4 placeholder:text-black/40" placeholder="Número de matricula" />
             </div>
-            <div className="flex items-end gap-2 p-2 justify-between w-full">
+            <div className="flex items-end gap-12 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="professora-aluno">Professora:</label>
-              <input type="text" id="professora-aluno" className="p-1 text-lg text-black w-2/4 placeholder:text-black" placeholder="141386950" />
+              <input type="text" id="professora-aluno" className="bg-slate-100 rounded p-1 text-lg text-black w-2/4 placeholder:text-black/40" placeholder="Nome da professora" />
             </div>
 
           </div>
@@ -316,17 +350,17 @@ export default function App() {
         <section>
           <SectionTitle>RELATÓRIO DESCRITIVO</SectionTitle>
           <div className="w-9/12 mt-10 mx-auto">
-            <textarea className="w-full border-black border bg-slate-100" name="relatorio-descritivo" id="relatorio-descritivo" cols={30} rows={20} 
-            placeholder="Descreva aqui o seu relatório..."/>
+            <textarea className="w-full border-black border bg-slate-100" name="relatorio-descritivo" id="relatorio-descritivo" cols={30} rows={20}
+              placeholder="Descreva aqui o seu relatório..." />
           </div>
           <div className="flex items-center justify-between w-8/12 mx-auto">
             <div className="flex flex-col items-center justify-between w-1/3">
-              <input type="text" id="assinatura-professora" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black" />
+              <input type="text" id="assinatura-professora" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black/40" />
               <hr className="w-full my-2 border-black" />
               <label htmlFor="assinatura-professora">Professor</label>
             </div>
             <div className="flex flex-col items-center justify-between w-1/3">
-              <input type="text" id="assinatura-coordenador" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black" />
+              <input type="text" id="assinatura-coordenador" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black/40" />
               <hr className="w-full my-2 border-black" />
               <label htmlFor="assinatura-coordenador">Coordenador</label>
             </div>
@@ -340,8 +374,8 @@ export default function App() {
       <div className="bg-emerald-500 w-20 h-20 rounded-full fixed bottom-4 right-4 flex items-center justify-center group transition-all">
         <Menu size={40} fill="#ffffff" />
         <div className="hidden fixed bottom-4 right-4 flex-col gap-2 items-center justify-center bg-white border border-slate-500 rounded-lg w-32 h-40 group-hover:flex transition-all">
-          <button className="text-white bg-emerald-500 w-10/12 p-1" onClick={saveAlumn}>Salvar</button>
-          <button className="text-white bg-red-500 w-10/12 p-1" onClick={saveAlumn}>Descartar</button>
+          <button className="text-white bg-emerald-500 w-10/12 p-1 rounded" onClick={saveAlumn}>Salvar</button>
+          <button className="text-white bg-red-500 w-10/12 p-1 rounded" onClick={deleteAlumn}>Descartar</button>
         </div>
       </div>
     </>
@@ -373,10 +407,16 @@ function Th2({ children }: { children: React.ReactNode }) {
   )
 }
 
-function Td({ children }: { children?: React.ReactNode }) {
+interface TdProps {
+  children?: React.ReactNode
+  name?: string
+  id?: string
+}
+
+function Td({ children, name, id }: TdProps) {
   return (
     <td className="border p-2">
-      <select name="" id="">
+      <select name={name} id={id}>
         <option value="S">S</option>
         <option value="N">N</option>
         <option value="AV">AV</option>
@@ -387,10 +427,10 @@ function Td({ children }: { children?: React.ReactNode }) {
   )
 }
 
-function Td2({ children }: { children?: React.ReactNode }) {
+function Td2({ children, name, id }: TdProps) {
   return (
     <td className="border p-2">
-      <select name="" id="">
+      <select name={name} id={id}>
         <option value="otimo">Ótimo</option>
         <option value="bom">Bom</option>
         <option value="regular">Regular</option>
