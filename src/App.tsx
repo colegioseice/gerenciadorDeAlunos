@@ -361,7 +361,8 @@ export default function App() {
     if (localStorage.getItem("alunos")) {
       setAlunos(JSON.parse(localStorage.getItem("alunos") || "{}"))
       console.log(JSON.parse(localStorage.getItem("alunos") || "{}"))
-    }
+    } 
+
   }, [])
 
   function getAlumn(e?: any, nome?: string) {
@@ -396,10 +397,14 @@ export default function App() {
     alert("Salvo!");
   }
   
-  function deleteAlumn(e?: any, nome?: string) {
+  function deleteAlumn(e?: any) {
     e.preventDefault()
     //logica pra deletar o aluno
-    localStorage.removeItem("alunos")
+    const storedAlunos = JSON.parse(localStorage.getItem("alunos") || "[]") || [];
+    const existingAlunoIndex = storedAlunos.findIndex((aluno: Aluno) => aluno.nome === nomeAluno);
+    storedAlunos.splice(existingAlunoIndex, 1);
+    localStorage.setItem("alunos", JSON.stringify(storedAlunos));
+
     alert("Deletado!")
   }
   function imprimir() {
@@ -418,8 +423,11 @@ export default function App() {
     <>
       <header className="flex flex-col justify-center items-start w-full min-h-[13rem] relative">
         <div className="flex justify-between items-center w-full mt-6 m-2">
-          <img src={currentAlumnPhoto} alt="Foto do aluno atual" className="w-24 absolute top-8 right-12 print:w-24 print:top-2 print:right-1" />
           <img src={logo_seice} alt="Logo seice" className="w-48 absolute top-[5%] left-[2%] print:w-36 print:top-2 print:left-1" />
+          <input type="file" name="fotoFile" id="fotoFile" className="w-24 h-32 sr-only z-20 absolute top-8 right-12" />
+          <label htmlFor="fotoFile" className="w-24 absolute top-8 right-12 print:w-24 print:top-2 print:right-1 cursor-pointer hover:opacity-75 transition-all">
+          <img src={currentAlumnPhoto} alt="Foto do aluno atual" className="w-full cursor-pointer hover:opacity-75 transition-all" title="Mudar foto" />
+          </label>
           <div className="flex flex-col gap-2 items-center justify-center w-full">
             <h1 className="text-2xl font-bold">SEICE - Sistema de Ensino Integrado de Campos Elíseos</h1>
             <h2 className="text-lg font-bold">Acompanhamento Infantil</h2>
@@ -431,7 +439,7 @@ export default function App() {
             <div className="flex items-center gap-8 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="nome-aluno">Aluno:</label>
               <div className="w-8/12 flex items-center">
-                <input type="text" id="nome-aluno" value={nomeAluno} onChange={e => {
+                <input type="text" list="nomesaluno" id="nome-aluno" value={nomeAluno} onChange={e => {
                   setNomeAluno(e.target.value)
                   setAlunoData({
                     ...alunoData,
@@ -441,6 +449,11 @@ export default function App() {
                 <button className="ml-2 p-2 rounded hover:bg-slate-300 transition-colors print:hidden" title="Buscar Aluno" onClick={(e) => {
                   getAlumn(e, nomeAluno)
                 }}><Search /></button>
+                <datalist id="nomesaluno">
+                  {alunos.map((aluno, index) => (
+                    <option key={index} value={aluno.nome} />
+                  ))}
+                </datalist>
               </div>
             </div>
             <div className="flex items-center gap-8 p-2 w-full">
@@ -466,11 +479,13 @@ export default function App() {
           <SectionTitle>AVALIAÇÃO DOS ASPECTOS PSICOMOTORES, SOCIAIS E COMPORTAMENTAIS</SectionTitle>
           <table className="mx-auto w-3/4 border-collapse border-black border mt-10">
             <thead>
-              <Th>ASPECTOS A SEREM AVALIADOS</Th>
-              <Th>1B</Th>
-              <Th>2B</Th>
-              <Th>3B</Th>
-              <Th>4B</Th>
+              <tr>
+                <Th>ASPECTOS A SEREM AVALIADOS</Th>
+                <Th>1B</Th>
+                <Th>2B</Th>
+                <Th>3B</Th>
+                <Th>4B</Th>
+              </tr>
             </thead>
             <tbody>
               <tr>
@@ -635,12 +650,14 @@ export default function App() {
           <SectionTitle>RENDIMENTO DAS AVALIAÇÕES</SectionTitle>
           <table className="mx-auto w-3/4 border-collapse border-black border mt-10">
             <thead>
-              <Th>DISCIPLINAS</Th>
-              <Th>1º Bimestre</Th>
-              <Th>2º Bimestre</Th>
-              <Th>3º Bimestre</Th>
-              <Th>4º Bimestre</Th>
-              <Th>Média</Th>
+              <tr>
+                <Th>DISCIPLINAS</Th>
+                <Th>1º Bimestre</Th>
+                <Th>2º Bimestre</Th>
+                <Th>3º Bimestre</Th>
+                <Th>4º Bimestre</Th>
+                <Th>Média</Th>
+              </tr>
             </thead>
             <tbody>
               <tr>
@@ -805,7 +822,6 @@ export default function App() {
       <td className="border p-2">
         {/* @ts-ignore */}
         <select className="p-1 border-0" name={name} id={id} value={alunoData.aspectosAvaliados[bimestre][tipo]} onChange={e => {
-          console.log(`${name}: ${e.target.value}`)
           setAlunoData({
             ...alunoData,
             aspectosAvaliados: {
@@ -818,9 +834,9 @@ export default function App() {
             }
           })
         }}>
+          <option value="Não Observado">Não Obs.</option>
           <option value="Não">Não</option>
           <option value="Sim">Sim</option>
-          <option value="Não Observado">Não Obs.</option>
           <option value="As Vezes">As Vezes</option>
         </select>
         {children}
@@ -839,7 +855,6 @@ export default function App() {
       <td className="border p-2">
         {/* @ts-ignore */}
         <select className="p-1 border-0" name={name} id={id} value={alunoData.rendimentoAvaliacoes[bimestre][tipo]} onChange={e => {
-          console.log(`${name}: ${e.target.value}`)
           setAlunoData({
             ...alunoData,
             rendimentoAvaliacoes: {
@@ -852,8 +867,8 @@ export default function App() {
             }
           })
         }}>
-          <option value="Ótimo">Ótimo</option>
           <option value="Bom">Bom</option>
+          <option value="Ótimo">Ótimo</option>
           <option value="Regular">Regular</option>
           <option value="Precisa Melhorar">P.M.</option>
         </select>
