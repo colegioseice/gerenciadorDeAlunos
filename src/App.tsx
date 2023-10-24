@@ -1,15 +1,16 @@
 import logo_seice from "./assets/logo_seice.png"
 import { Download, Menu, Save, Search, Trash2 } from "lucide-react"
 
-import currentAlumnPhoto from "./assets/foto_aluno.jpg"
+import defaultAlumnPhoto from "./assets/foto_default.jpg"
 import trequinhoPhoto from "./assets/trequinho.svg"
 import { useEffect, useState } from "react";
 
 interface Aluno {
   nome: string;
-  matricula: number;
+  matricula: string;
   turma: string;
   professora: string;
+  fotoAluno: any;
 
   // Campos das tabelas de avaliação dos aspectos psicomotores, sociais e comportamentais
   aspectosAvaliados: {
@@ -189,179 +190,184 @@ export default function App() {
   const [alunos, setAlunos] = useState<Aluno[]>(JSON.parse(localStorage.getItem("alunos") || "[]") || []);
   const [alunoData, setAlunoData] = useState<Aluno>({
     nome: "",
-    matricula: 0,
+    matricula: "",
     turma: "",
     professora: "",
+    fotoAluno: null,
     aspectosAvaliados: {
       "1B": {
-        aprendeComFacilidade: "",
-        demonstraInteresseAtividades: "",
-        realizaAtividadesAula: "",
-        realizaAtividadesCasa: "",
-        apresentaDificuldadeCoordenacao: "",
-        manejaMaterialArtes: "",
-        pronunciaPalavrasDificuldades: "",
-        apresentaDificuldadeEnxergar: "",
-        apresentaDificuldadeAudição: "",
-        manifestaTimidez: "",
-        participaBrincadeiras: "",
-        partilhaObjetosBoaVontade: "",
-        pedeSempreAjuda: "",
-        choraComFrequencia: "",
-        respeitaProfessores: "",
-        demonstraAgressividade: "",
-        fazGestosObscenos: "",
-        cuidaBemMateriais: "",
-        mantemHigieneEscola: "",
-        frequentaAssiduamenteAulas: "",
-        usaUniforme: "",
-        cumpreHorariosEscola: ""
+        aprendeComFacilidade: "-",
+        demonstraInteresseAtividades: "-",
+        realizaAtividadesAula: "-",
+        realizaAtividadesCasa: "-",
+        apresentaDificuldadeCoordenacao: "-",
+        manejaMaterialArtes: "-",
+        pronunciaPalavrasDificuldades: "-",
+        apresentaDificuldadeEnxergar: "-",
+        apresentaDificuldadeAudição: "-",
+        manifestaTimidez: "-",
+        participaBrincadeiras: "-",
+        partilhaObjetosBoaVontade: "-",
+        pedeSempreAjuda: "-",
+        choraComFrequencia: "-",
+        respeitaProfessores: "-",
+        demonstraAgressividade: "-",
+        fazGestosObscenos: "-",
+        cuidaBemMateriais: "-",
+        mantemHigieneEscola: "-",
+        frequentaAssiduamenteAulas: "-",
+        usaUniforme: "-",
+        cumpreHorariosEscola: "-"
       },
       "2B": {
-        aprendeComFacilidade: "",
-        demonstraInteresseAtividades: "",
-        realizaAtividadesAula: "",
-        realizaAtividadesCasa: "",
-        apresentaDificuldadeCoordenacao: "",
-        manejaMaterialArtes: "",
-        pronunciaPalavrasDificuldades: "",
-        apresentaDificuldadeEnxergar: "",
-        apresentaDificuldadeAudição: "",
-        manifestaTimidez: "",
-        participaBrincadeiras: "",
-        partilhaObjetosBoaVontade: "",
-        pedeSempreAjuda: "",
-        choraComFrequencia: "",
-        respeitaProfessores: "",
-        demonstraAgressividade: "",
-        fazGestosObscenos: "",
-        cuidaBemMateriais: "",
-        mantemHigieneEscola: "",
-        frequentaAssiduamenteAulas: "",
-        usaUniforme: "",
-        cumpreHorariosEscola: ""
+        aprendeComFacilidade: "-",
+        demonstraInteresseAtividades: "-",
+        realizaAtividadesAula: "-",
+        realizaAtividadesCasa: "-",
+        apresentaDificuldadeCoordenacao: "-",
+        manejaMaterialArtes: "-",
+        pronunciaPalavrasDificuldades: "-",
+        apresentaDificuldadeEnxergar: "-",
+        apresentaDificuldadeAudição: "-",
+        manifestaTimidez: "-",
+        participaBrincadeiras: "-",
+        partilhaObjetosBoaVontade: "-",
+        pedeSempreAjuda: "-",
+        choraComFrequencia: "-",
+        respeitaProfessores: "-",
+        demonstraAgressividade: "-",
+        fazGestosObscenos: "-",
+        cuidaBemMateriais: "-",
+        mantemHigieneEscola: "-",
+        frequentaAssiduamenteAulas: "-",
+        usaUniforme: "-",
+        cumpreHorariosEscola: "-"
       },
       "3B": {
-        aprendeComFacilidade: "",
-        demonstraInteresseAtividades: "",
-        realizaAtividadesAula: "",
-        realizaAtividadesCasa: "",
-        apresentaDificuldadeCoordenacao: "",
-        manejaMaterialArtes: "",
-        pronunciaPalavrasDificuldades: "",
-        apresentaDificuldadeEnxergar: "",
-        apresentaDificuldadeAudição: "",
-        manifestaTimidez: "",
-        participaBrincadeiras: "",
-        partilhaObjetosBoaVontade: "",
-        pedeSempreAjuda: "",
-        choraComFrequencia: "",
-        respeitaProfessores: "",
-        demonstraAgressividade: "",
-        fazGestosObscenos: "",
-        cuidaBemMateriais: "",
-        mantemHigieneEscola: "",
-        frequentaAssiduamenteAulas: "",
-        usaUniforme: "",
-        cumpreHorariosEscola: ""
+        aprendeComFacilidade: "-",
+        demonstraInteresseAtividades: "-",
+        realizaAtividadesAula: "-",
+        realizaAtividadesCasa: "-",
+        apresentaDificuldadeCoordenacao: "-",
+        manejaMaterialArtes: "-",
+        pronunciaPalavrasDificuldades: "-",
+        apresentaDificuldadeEnxergar: "-",
+        apresentaDificuldadeAudição: "-",
+        manifestaTimidez: "-",
+        participaBrincadeiras: "-",
+        partilhaObjetosBoaVontade: "-",
+        pedeSempreAjuda: "-",
+        choraComFrequencia: "-",
+        respeitaProfessores: "-",
+        demonstraAgressividade: "-",
+        fazGestosObscenos: "-",
+        cuidaBemMateriais: "-",
+        mantemHigieneEscola: "-",
+        frequentaAssiduamenteAulas: "-",
+        usaUniforme: "-",
+        cumpreHorariosEscola: "-"
       },
       "4B": {
-        aprendeComFacilidade: "",
-        demonstraInteresseAtividades: "",
-        realizaAtividadesAula: "",
-        realizaAtividadesCasa: "",
-        apresentaDificuldadeCoordenacao: "",
-        manejaMaterialArtes: "",
-        pronunciaPalavrasDificuldades: "",
-        apresentaDificuldadeEnxergar: "",
-        apresentaDificuldadeAudição: "",
-        manifestaTimidez: "",
-        participaBrincadeiras: "",
-        partilhaObjetosBoaVontade: "",
-        pedeSempreAjuda: "",
-        choraComFrequencia: "",
-        respeitaProfessores: "",
-        demonstraAgressividade: "",
-        fazGestosObscenos: "",
-        cuidaBemMateriais: "",
-        mantemHigieneEscola: "",
-        frequentaAssiduamenteAulas: "",
-        usaUniforme: "",
-        cumpreHorariosEscola: ""
+        aprendeComFacilidade: "-",
+        demonstraInteresseAtividades: "-",
+        realizaAtividadesAula: "-",
+        realizaAtividadesCasa: "-",
+        apresentaDificuldadeCoordenacao: "-",
+        manejaMaterialArtes: "-",
+        pronunciaPalavrasDificuldades: "-",
+        apresentaDificuldadeEnxergar: "-",
+        apresentaDificuldadeAudição: "-",
+        manifestaTimidez: "-",
+        participaBrincadeiras: "-",
+        partilhaObjetosBoaVontade: "-",
+        pedeSempreAjuda: "-",
+        choraComFrequencia: "-",
+        respeitaProfessores: "-",
+        demonstraAgressividade: "-",
+        fazGestosObscenos: "-",
+        cuidaBemMateriais: "-",
+        mantemHigieneEscola: "-",
+        frequentaAssiduamenteAulas: "-",
+        usaUniforme: "-",
+        cumpreHorariosEscola: "-"
       }
     },
     rendimentoAvaliacoes: {
       "1B": {
-        portugues: "",
-        matematica: "",
-        ciencias: "",
-        sociedade: "",
-        edArtistica: "",
-        leitura: "",
-        ingles: "",
-        recreacao: "",
-        comportamento: "",
-        faltas: "",
+        portugues: "-",
+        matematica: "-",
+        ciencias: "-",
+        sociedade: "-",
+        edArtistica: "-",
+        leitura: "-",
+        ingles: "-",
+        recreacao: "-",
+        comportamento: "-",
+        faltas: "-",
       },
       "2B": {
-        portugues: "",
-        matematica: "",
-        ciencias: "",
-        sociedade: "",
-        edArtistica: "",
-        leitura: "",
-        ingles: "",
-        recreacao: "",
-        comportamento: "",
-        faltas: "",
+        portugues: "-",
+        matematica: "-",
+        ciencias: "-",
+        sociedade: "-",
+        edArtistica: "-",
+        leitura: "-",
+        ingles: "-",
+        recreacao: "-",
+        comportamento: "-",
+        faltas: "-",
       },
       "3B": {
-        portugues: "",
-        matematica: "",
-        ciencias: "",
-        sociedade: "",
-        edArtistica: "",
-        leitura: "",
-        ingles: "",
-        recreacao: "",
-        comportamento: "",
-        faltas: "",
+        portugues: "-",
+        matematica: "-",
+        ciencias: "-",
+        sociedade: "-",
+        edArtistica: "-",
+        leitura: "-",
+        ingles: "-",
+        recreacao: "-",
+        comportamento: "-",
+        faltas: "-",
       },
       "4B": {
-        portugues: "",
-        matematica: "",
-        ciencias: "",
-        sociedade: "",
-        edArtistica: "",
-        leitura: "",
-        ingles: "",
-        recreacao: "",
-        comportamento: "",
-        faltas: "",
+        portugues: "-",
+        matematica: "-",
+        ciencias: "-",
+        sociedade: "-",
+        edArtistica: "-",
+        leitura: "-",
+        ingles: "-",
+        recreacao: "-",
+        comportamento: "-",
+        faltas: "-",
       },
       "media": {
-        portugues: "",
-        matematica: "",
-        ciencias: "",
-        sociedade: "",
-        edArtistica: "",
-        leitura: "",
-        ingles: "",
-        recreacao: "",
-        comportamento: "",
-        faltas: "",
+        portugues: "-",
+        matematica: "-",
+        ciencias: "-",
+        sociedade: "-",
+        edArtistica: "-",
+        leitura: "-",
+        ingles: "-",
+        recreacao: "-",
+        comportamento: "-",
+        faltas: "-",
       },
     },
     relatorioDescritivo: "",
     assinaturaProfessor: "",
     assinaturaCoordenador: ""
   });
+  const [nomeAluno, setNomeAluno] = useState("")
+  // @ts-ignore
+  const [alunoImageBlob, setAlunoImageBlob] = useState<Blob | null>(null);
+
+
 
   useEffect(() => {
     if (localStorage.getItem("alunos")) {
       setAlunos(JSON.parse(localStorage.getItem("alunos") || "{}"))
-      console.log(JSON.parse(localStorage.getItem("alunos") || "{}"))
-    } 
+    }
 
   }, [])
 
@@ -369,20 +375,54 @@ export default function App() {
     //logica para obter o aluno pelo nome
     e.preventDefault()
     const aluno = alunos.find((aluno) => aluno.nome.toLowerCase() === nome?.toLowerCase() || "")
-    console.log(aluno ? "Aluno obtido! " + JSON.stringify(aluno) : "Nenhum aluno encontrado!")
     alert(aluno ? "Aluno obtido!" : "Nenhum aluno encontrado!")
     aluno && setAlunoData(aluno)
   }
 
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          // @ts-ignore
+          const dataURL = event.target.result;
+          // @ts-ignore
+          fetch(dataURL)
+            .then((res) => res.blob())
+            .then((blob) => {
+              setAlunoImageBlob(blob);
+              // Convert the blob to a base64-encoded string
+              const reader = new FileReader();
+              reader.onload = () => {
+                const base64Image = reader.result as string;
+                setAlunoData({
+                  ...alunoData,
+                  fotoAluno: base64Image, // Save the base64-encoded image
+                });
+              };
+              reader.readAsDataURL(blob);
+            });
+        };
+        reader.readAsDataURL(file);
+      }
+    } else alert("Nenhuma imagem selecionada!");
+  }
+
   function saveAlumn(e?: any) {
     e.preventDefault();
-  
+
+    if(nomeAluno === ""){
+      alert("Nome do aluno não pode ser vazio!")
+      return
+    }
+
     // Obtém a lista de alunos do localStorage
     const storedAlunos = JSON.parse(localStorage.getItem("alunos") || "[]") || [];
-    
+
     // Verifica se o aluno já existe na lista
     const existingAlunoIndex = storedAlunos.findIndex((aluno: Aluno) => aluno.nome === alunoData.nome);
-  
+
     if (existingAlunoIndex !== -1) {
       // Se o aluno já existe, atualiza seus dados
       storedAlunos[existingAlunoIndex] = alunoData;
@@ -390,13 +430,14 @@ export default function App() {
       // Se o aluno não existe, adiciona-o à lista
       storedAlunos.push(alunoData);
     }
-  
+
     // Salva a lista atualizada de alunos no localStorage
     localStorage.setItem("alunos", JSON.stringify(storedAlunos));
-  
+
     alert("Salvo!");
   }
-  
+
+
   function deleteAlumn(e?: any) {
     e.preventDefault()
     //logica pra deletar o aluno
@@ -417,16 +458,21 @@ export default function App() {
   }
 
 
-  const [nomeAluno, setNomeAluno] = useState("")
-
   return (
     <>
       <header className="flex flex-col justify-center items-start w-full min-h-[13rem] relative">
         <div className="flex justify-between items-center w-full mt-6 m-2">
-          <img src={logo_seice} alt="Logo seice" className="w-48 absolute top-[5%] left-[2%] print:w-36 print:top-2 print:left-1" />
-          <input type="file" name="fotoFile" id="fotoFile" className="w-24 h-32 sr-only z-20 absolute top-8 right-12" />
+          <img src={logo_seice} alt="Logo seice" className="w-48 object-cover absolute top-[5%] left-[2%] print:w-36 print:top-2 print:left-1" />
+          <input type="file" name="fotoFile" onChange={handleFileChange} accept="image/*" id="fotoFile" className="w-24 h-32 sr-only z-20 absolute top-8 right-12" />
           <label htmlFor="fotoFile" className="w-24 absolute top-8 right-12 print:w-24 print:top-2 print:right-1 cursor-pointer hover:opacity-75 transition-all">
-          <img src={currentAlumnPhoto} alt="Foto do aluno atual" className="w-full cursor-pointer hover:opacity-75 transition-all" title="Mudar foto" />
+            <img
+              src={alunoData.fotoAluno || defaultAlumnPhoto}
+              alt="Foto do aluno atual"
+              className="w-full cursor-pointer hover:opacity-75 transition-all"
+              title="Mudar foto"
+            />
+
+
           </label>
           <div className="flex flex-col gap-2 items-center justify-center w-full">
             <h1 className="text-2xl font-bold">SEICE - Sistema de Ensino Integrado de Campos Elíseos</h1>
@@ -445,7 +491,7 @@ export default function App() {
                     ...alunoData,
                     nome: e.target.value
                   })
-                  }} className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-full" placeholder="Nome do Aluno" />
+                }} className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-full" placeholder="Nome do Aluno" />
                 <button className="ml-2 p-2 rounded hover:bg-slate-300 transition-colors print:hidden" title="Buscar Aluno" onClick={(e) => {
                   getAlumn(e, nomeAluno)
                 }}><Search /></button>
@@ -458,17 +504,17 @@ export default function App() {
             </div>
             <div className="flex items-center gap-8 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="turma-aluno">Turma:</label>
-              <input type="text" id="turma-aluno" className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-8/12" placeholder="Turma" />
+              <input type="text" id="turma-aluno" value={alunoData.turma} onChange={e => setAlunoData({ ...alunoData, turma: e.target.value })} className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-8/12" placeholder="Turma" />
             </div>
           </div>
           <div className="flex flex-col items-start w-1/2">
             <div className="flex items-end gap-8 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="matricula-aluno">N° Matrícula:</label>
-              <input type="number" min={0} id="matricula-aluno" className="bg-slate-100 rounded p-1 text-lg text-black w-2/4 placeholder:text-black/40" placeholder="Número de matricula" />
+              <input type="text" id="matricula-aluno" value={alunoData.matricula} onChange={e => setAlunoData({ ...alunoData, matricula: String(e.target.value) })} className="bg-slate-100 rounded p-1 text-lg text-black w-2/4 placeholder:text-black/40" placeholder="Número de matricula" />
             </div>
             <div className="flex items-end gap-12 p-2 w-full">
               <label className="text-lg font-bold" htmlFor="professora-aluno">Professora:</label>
-              <input type="text" id="professora-aluno" className="bg-slate-100 rounded p-1 text-lg text-black w-2/4 placeholder:text-black/40" placeholder="Nome da professora" />
+              <input type="text" id="professora-aluno" value={alunoData.professora} onChange={e => setAlunoData({ ...alunoData, professora: e.target.value })} className="bg-slate-100 rounded p-1 text-lg text-black w-2/4 placeholder:text-black/40" placeholder="Nome da professora" />
             </div>
 
           </div>
@@ -649,7 +695,7 @@ export default function App() {
         <section>
           <SectionTitle>RENDIMENTO DAS AVALIAÇÕES</SectionTitle>
           <table className="mx-auto w-3/4 border-collapse border-black border mt-10">
-            <thead>
+            <thead>f
               <tr>
                 <Th>DISCIPLINAS</Th>
                 <Th>1º Bimestre</Th>
@@ -834,6 +880,7 @@ export default function App() {
             }
           })
         }}>
+          <option disabled> - </option>
           <option value="Não Observado">Não Obs.</option>
           <option value="Não">Não</option>
           <option value="Sim">Sim</option>
@@ -867,6 +914,7 @@ export default function App() {
             }
           })
         }}>
+          <option disabled> - </option>
           <option value="Bom">Bom</option>
           <option value="Ótimo">Ótimo</option>
           <option value="Regular">Regular</option>
