@@ -695,7 +695,7 @@ export default function App() {
         <section>
           <SectionTitle>RENDIMENTO DAS AVALIAÇÕES</SectionTitle>
           <table className="mx-auto w-3/4 border-collapse border-black border mt-10">
-            <thead>f
+            <thead>
               <tr>
                 <Th>DISCIPLINAS</Th>
                 <Th>1º Bimestre</Th>
@@ -799,12 +799,12 @@ export default function App() {
           </div>
           <div className="flex items-center justify-between w-8/12 mx-auto">
             <div className="flex flex-col items-center justify-between w-1/3">
-              <input type="text" id="assinatura-professora" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black/40" />
+              <input type="text" id="assinatura-professora" value={alunoData.assinaturaProfessor} onChange={(e) => setAlunoData({...alunoData, assinaturaProfessor: e.target.value})} className="p-1 text-center text-lg text-black bg-slate-100 w-full placeholder:text-black/40" />
               <hr className="w-full my-2 border-black" />
               <label htmlFor="assinatura-professora">Professor</label>
             </div>
             <div className="flex flex-col items-center justify-between w-1/3">
-              <input type="text" id="assinatura-coordenador" className="p-1 text-lg text-black bg-slate-100 w-full placeholder:text-black/40" />
+              <input type="text" id="assinatura-coordenador" value={alunoData.assinaturaCoordenador} onChange={(e) => setAlunoData({...alunoData, assinaturaCoordenador: e.target.value})} className="p-1 text-center text-lg text-black bg-slate-100 w-full placeholder:text-black/40" />
               <hr className="w-full my-2 border-black" />
               <label htmlFor="assinatura-coordenador">Coordenador</label>
             </div>
