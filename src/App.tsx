@@ -543,10 +543,10 @@ export default function App() {
               </tr>
               <tr>
                 <Th2>2- DEMONSTRA INTERESSE PELAS ATIVIDADES.</Th2>
-                <Td name="aspectosAvaliados.1B.demonstraInteressePelasAtividades" id="aspectosAvaliados.1B.demonstraInteressePelasAtividades"></Td>
-                <Td name="aspectosAvaliados.2B.demonstraInteressePelasAtividades" id="aspectosAvaliados.2B.demonstraInteressePelasAtividades"></Td>
-                <Td name="aspectosAvaliados.3B.demonstraInteressePelasAtividades" id="aspectosAvaliados.3B.demonstraInteressePelasAtividades"></Td>
-                <Td name="aspectosAvaliados.4B.demonstraInteressePelasAtividades" id="aspectosAvaliados.4B.demonstraInteressePelasAtividades"></Td>
+                <Td name="aspectosAvaliados.1B.demonstraInteresseAtividades" id="aspectosAvaliados.1B.demonstraInteresseAtividades"></Td>
+                <Td name="aspectosAvaliados.2B.demonstraInteresseAtividades" id="aspectosAvaliados.2B.demonstraInteresseAtividades"></Td>
+                <Td name="aspectosAvaliados.3B.demonstraInteresseAtividades" id="aspectosAvaliados.3B.demonstraInteresseAtividades"></Td>
+                <Td name="aspectosAvaliados.4B.demonstraInteresseAtividades" id="aspectosAvaliados.4B.demonstraInteresseAtividades"></Td>
               </tr>
               <tr>
                 <Th2>3- REALIZA AS ATIVIDADES DE AULA.</Th2>
@@ -592,10 +592,10 @@ export default function App() {
               </tr>
               <tr>
                 <Th2>9- APRESENTA ALGUMA DIFICULDADE DE AUDIÇÃO.</Th2>
-                <Td name="aspectosAvaliados.1B.apresentaDificuldadeAudiça" id="aspectosAvaliados.1B.apresentaDificuldadeAudiça"></Td>
-                <Td name="aspectosAvaliados.2B.apresentaDificuldadeAudiça" id="aspectosAvaliados.2B.apresentaDificuldadeAudiça"></Td>
-                <Td name="aspectosAvaliados.3B.apresentaDificuldadeAudiça" id="aspectosAvaliados.3B.apresentaDificuldadeAudiça"></Td>
-                <Td name="aspectosAvaliados.4B.apresentaDificuldadeAudiça" id="aspectosAvaliados.4B.apresentaDificuldadeAudiça"></Td>
+                <Td name="aspectosAvaliados.1B.apresentaDificuldadeAudição" id="aspectosAvaliados.1B.apresentaDificuldadeAudição"></Td>
+                <Td name="aspectosAvaliados.2B.apresentaDificuldadeAudição" id="aspectosAvaliados.2B.apresentaDificuldadeAudição"></Td>
+                <Td name="aspectosAvaliados.3B.apresentaDificuldadeAudição" id="aspectosAvaliados.3B.apresentaDificuldadeAudição"></Td>
+                <Td name="aspectosAvaliados.4B.apresentaDificuldadeAudição" id="aspectosAvaliados.4B.apresentaDificuldadeAudição"></Td>
               </tr>
               <tr>
                 <Th2>10- MANIFESTA TIMIDEZ.</Th2>
@@ -724,11 +724,11 @@ export default function App() {
               </tr>
               <tr>
                 <Th2>Ciências</Th2>
-                <Td2 name="rendimentoAvaliacoes.1B.ciencia" id="rendimentoAvaliacoes.1B.ciencia"></Td2>
-                <Td2 name="rendimentoAvaliacoes.2B.ciencia" id="rendimentoAvaliacoes.2B.ciencia"></Td2>
-                <Td2 name="rendimentoAvaliacoes.3B.ciencia" id="rendimentoAvaliacoes.3B.ciencia"></Td2>
-                <Td2 name="rendimentoAvaliacoes.4B.ciencia" id="rendimentoAvaliacoes.4B.ciencia"></Td2>
-                <Td2 name="rendimentoAvaliacoes.media.ciencia" id="rendimentoAvaliacoes.media.ciencia"></Td2>
+                <Td2 name="rendimentoAvaliacoes.1B.ciencias" id="rendimentoAvaliacoes.1B.ciencias"></Td2>
+                <Td2 name="rendimentoAvaliacoes.2B.ciencias" id="rendimentoAvaliacoes.2B.ciencias"></Td2>
+                <Td2 name="rendimentoAvaliacoes.3B.ciencias" id="rendimentoAvaliacoes.3B.ciencias"></Td2>
+                <Td2 name="rendimentoAvaliacoes.4B.ciencias" id="rendimentoAvaliacoes.4B.ciencias"></Td2>
+                <Td2 name="rendimentoAvaliacoes.media.ciencias" id="rendimentoAvaliacoes.media.ciencias"></Td2>
               </tr>
               <tr>
                 <Th2>Sociedade</Th2>
@@ -740,11 +740,11 @@ export default function App() {
               </tr>
               <tr>
                 <Th2>Ed. Artística</Th2>
-                <Td2 name="rendimentoAvaliacoes.1B.educacaoArt" id="rendimentoAvaliacoes.1B.educacaoArt"></Td2>
-                <Td2 name="rendimentoAvaliacoes.2B.educacaoArt" id="rendimentoAvaliacoes.2B.educacaoArt"></Td2>
-                <Td2 name="rendimentoAvaliacoes.3B.educacaoArt" id="rendimentoAvaliacoes.3B.educacaoArt"></Td2>
-                <Td2 name="rendimentoAvaliacoes.4B.educacaoArt" id="rendimentoAvaliacoes.4B.educacaoArt"></Td2>
-                <Td2 name="rendimentoAvaliacoes.media.educacaoArt" id="rendimentoAvaliacoes.media.educacaoArt"></Td2>
+                <Td2 name="rendimentoAvaliacoes.1B.edArtistica" id="rendimentoAvaliacoes.1B.edArtistica"></Td2>
+                <Td2 name="rendimentoAvaliacoes.2B.edArtistica" id="rendimentoAvaliacoes.2B.edArtistica"></Td2>
+                <Td2 name="rendimentoAvaliacoes.3B.edArtistica" id="rendimentoAvaliacoes.3B.edArtistica"></Td2>
+                <Td2 name="rendimentoAvaliacoes.4B.edArtistica" id="rendimentoAvaliacoes.4B.edArtistica"></Td2>
+                <Td2 name="rendimentoAvaliacoes.media.edArtistica" id="rendimentoAvaliacoes.media.edArtistica"></Td2>
               </tr>
               <tr>
                 <Th2>Leitura</Th2>
@@ -794,7 +794,7 @@ export default function App() {
         <section>
           <SectionTitle>RELATÓRIO DESCRITIVO</SectionTitle>
           <div className="w-9/12 mt-10 mx-auto">
-            <textarea className="w-full border-black border bg-slate-100" name="relatorio-descritivo" id="relatorio-descritivo" cols={30} rows={20}
+            <textarea className="w-full border-black border bg-slate-100" value={alunoData.relatorioDescritivo} onChange={(e) => setAlunoData({...alunoData, relatorioDescritivo: String(e.target.value)})} name="relatorio-descritivo" id="relatorio-descritivo" cols={30} rows={20}
               placeholder="Descreva aqui o seu relatório..." />
           </div>
           <div className="flex items-center justify-between w-8/12 mx-auto">
@@ -863,7 +863,6 @@ export default function App() {
     const bimestre = newName?.[1]
     const tipo = newName?.[2]
 
-    //name="aspectosAvaliados.1B.apresentaDificuldadeAudiça"
     return (
       <td className="border p-2">
         {/* @ts-ignore */}
@@ -895,8 +894,6 @@ export default function App() {
 
     const bimestre = newName?.[1]
     const tipo = newName?.[2]
-
-    //name="rendimentoAvaliacoes.1B.ciencia"
 
     return (
       <td className="border p-2">
