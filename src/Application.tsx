@@ -482,6 +482,7 @@ export default function Application({ emailProfessor }: any) {
 
     function logout() {
         document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "emailProfessor=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         alert("Logout efetuado com sucesso!")
         window.location.reload();
     }

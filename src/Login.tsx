@@ -14,6 +14,7 @@ export default function Login({ setIsLoggedIn, setEmailProfessor }: { setIsLogge
             setEmailProfessor(email)
             setIsLoggedIn(true)
             document.cookie = `login=${email}`
+            document.cookie = `emailProfessor=${email}`
         }).catch((error: any) => {
             console.log(error)
             alert("Login ou senha inválidos!")
