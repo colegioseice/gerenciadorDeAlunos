@@ -480,6 +480,12 @@ export default function Application({ emailProfessor }: any) {
 
     }
 
+    function logout() {
+        document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        alert("Logout efetuado com sucesso!")
+        window.location.reload();
+    }
+
 
     const date = new Date();
     const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
@@ -847,7 +853,7 @@ export default function Application({ emailProfessor }: any) {
                     <button className="text-white bg-emerald-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={saveAlumn}><Save /> <span className="flex-1">Salvar</span></button>
                     <button className="text-white bg-red-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={deleteAlumn}><Trash2 /> <span className="flex-1">Deletar</span></button>
                     <button className="text-white bg-blue-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={imprimir}> <Download /> <span className="flex-1">Imprimir</span></button>
-                    <button className="text-white bg-red-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={imprimir}> <LogOut /> <span className="flex-1">Sair</span></button>
+                    <button className="text-white bg-red-500 w-10/12 p-1 rounded flex items-center justify-between" onClick={logout}> <LogOut /> <span className="flex-1">Sair</span></button>
                 </div>
             </div>
         </>
