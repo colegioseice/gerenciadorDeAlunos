@@ -1,21 +1,30 @@
-import { useEffect, useState } from "react"
-import Login from "./Login"
-import Application from "./Application"
+import { useEffect, useState } from "react";
+import Login from "./Login";
+import Application from "./Application";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [emailProfessor, setEmailProfessor] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [emailProfessor, setEmailProfessor] = useState("");
 
   useEffect(() => {
     if (document.cookie.includes("login")) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     }
-    if(document.cookie.includes("emailProfessor")) {
-      console.log(document.cookie.split("=")[1].split(";")[0])
-      setEmailProfessor(document.cookie.split("=")[1].split(";")[0])
+    if (document.cookie.includes("emailProfessor")) {
+      const email = document.cookie
+        .split(";")
+        .filter((cookie) => cookie.includes("emailProfessor"))[0]
+        .split("=")[1];
+      setEmailProfessor(email);
     }
-  }, [])
+  }, []);
 
-  return isLoggedIn ? <Application emailProfessor={emailProfessor} /> : <Login setIsLoggedIn={setIsLoggedIn} setEmailProfessor={setEmailProfessor} />
-
+  return isLoggedIn ? (
+    <Application emailProfessor={emailProfessor} />
+  ) : (
+    <Login
+      setIsLoggedIn={setIsLoggedIn}
+      setEmailProfessor={setEmailProfessor}
+    />
+  );
 }
