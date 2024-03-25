@@ -195,7 +195,7 @@ export default function Application({
   const [alunos, setAlunos] = useState<Aluno[]>(
     JSON.parse(localStorage.getItem("alunos") || "[]") || []
   );
-  const [alunoData, setAlunoData] = useState<Aluno>({
+  const [alunoData, setAlunoData] = useState<Aluno | any>({
     emailProfessor: emailProfessor,
     nome: "",
     matricula: "",
@@ -1463,7 +1463,6 @@ export default function Application({
               aspectosAvaliados: {
                 ...alunoData.aspectosAvaliados,
                 [bimestre]: {
-                  // @ts-expect-error - TSCONVERSION
                   ...alunoData.aspectosAvaliados[bimestre],
                   [tipo]: e.target.value,
                 },
@@ -1499,7 +1498,6 @@ export default function Application({
               rendimentoAvaliacoes: {
                 ...alunoData.rendimentoAvaliacoes,
                 [bimestre]: {
-                  // @ts-expect-error - TSCONVERSION
                   ...alunoData.rendimentoAvaliacoes[bimestre],
                   [tipo]: e.target.value,
                 },
