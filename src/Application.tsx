@@ -3,9 +3,9 @@ import { Download, LogOut, Menu, Save, Search, Trash2 } from "lucide-react";
 
 import defaultAlumnPhoto from "./assets/foto_default.jpg";
 import trequinhoPhoto from "./assets/trequinho.svg";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { db, collection, addDoc, getDocs, doc, deleteDoc } from "./firebase";
-import { updateDoc } from "firebase/firestore";
+import { DocumentData, updateDoc } from "firebase/firestore";
 
 interface Aluno {
   emailProfessor: string;
@@ -195,7 +195,7 @@ export default function Application({
   const [alunos, setAlunos] = useState<Aluno[]>(
     JSON.parse(localStorage.getItem("alunos") || "[]") || []
   );
-  const [alunoData, setAlunoData] = useState<Aluno | any>({
+  const [alunoData, setAlunoData] = useState<Aluno>({
     emailProfessor: emailProfessor,
     nome: "",
     matricula: "",
@@ -367,44 +367,41 @@ export default function Application({
     assinaturaCoordenador: "",
   });
   const [nomeAluno, setNomeAluno] = useState("");
-  // @ts-expect-error - TSCONVERSION
-  const [alunoImageBlob, setAlunoImageBlob] = useState<Blob | null>(null);
+  const [, setAlunoImageBlob] = useState<Blob | null>(null);
   const [turmas, setTurmas] = useState<string[]>([]);
 
-  useEffect(() => {
-    async function fetchAlunos() {
-      try {
-        console.log("Email", emailProfessor);
-        const querySnapshot = await getDocs(collection(db, "alunos"));
-        const fetchedAlunos = querySnapshot.docs
-          .map((doc) => doc.data())
-          // @ts-expect-error - TSCONVERSION
-          .filter((aluno: Aluno) => aluno.emailProfessor === emailProfessor); // Filtra os alunos pelo email do professor
-        console.log(fetchedAlunos); // Imprime os alunos filtrados no console de admin
+  async function fetchAlunos(turma?: string) {
+    try {
+      const querySnapshot = await getDocs(collection(db, "alunos"));
+      const fetchedAlunos = querySnapshot.docs
+        .map((doc) => doc.data())
         // @ts-expect-error - TSCONVERSION
-        setAlunos(fetchedAlunos);
-      } catch (error) {
-        console.error("Erro ao buscar alunos do Firestore:", error);
-      }
+        .filter((aluno: Aluno) => aluno.turma === (turma ?? alunoData.turma)); // Filtra os alunos pelo email do professor
+      // @ts-expect-error - TSCONVERSION
+      setAlunos(fetchedAlunos);
+    } catch (error) {
+      console.error("Erro ao buscar alunos do Firestore:", error);
     }
+  }
 
-    async function fetchTurmas() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "turmas"));
-        const fetchedTurmas = querySnapshot.docs.map((doc) => doc.data().Turma);
-        setTurmas(fetchedTurmas);
-      } catch (error) {
-        console.error("Erro ao buscar turmas do Firestore:", error);
-      }
+  async function fetchTurmas() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "turmas"));
+      const fetchedTurmas = querySnapshot.docs.map((doc) => doc.data().Turma);
+      setTurmas(fetchedTurmas);
+    } catch (error) {
+      console.error("Erro ao buscar turmas do Firestore:", error);
     }
+  }
 
+  useEffect(() => {
     fetchTurmas();
     fetchAlunos();
   }, []);
 
-  function getAlumn(e?: any, nome?: string) {
+  function getAlumn(e?: FormEvent, nome?: string) {
     //logica para obter o aluno pelo nome
-    e.preventDefault();
+    e && e.preventDefault();
     const aluno = alunos.find(
       (aluno) => aluno.nome.toLowerCase() === nome?.toLowerCase() || ""
     );
@@ -442,7 +439,7 @@ export default function Application({
     } else alert("Nenhuma imagem selecionada!");
   }
 
-  async function saveAlumn(e?: any) {
+  async function saveAlumn(e: FormEvent) {
     e.preventDefault();
 
     if (nomeAluno === "") {
@@ -457,7 +454,7 @@ export default function Application({
       );
 
       if (existingAluno) {
-        await updateDoc(existingAluno.ref, alunoData);
+        await updateDoc(existingAluno.ref, alunoData as DocumentData);
         alert("Aluno atualizado!");
       } else {
         const docRef = await addDoc(collection(db, "alunos"), alunoData);
@@ -469,11 +466,10 @@ export default function Application({
     }
   }
 
-  async function deleteAlumn(e?: any) {
-    e.preventDefault();
+  async function deleteAlumn(e?: FormEvent) {
+    e && e.preventDefault();
     try {
-      // @ts-ignore
-      await deleteDoc(doc(db, "alunos", alunoData.id));
+      await deleteDoc(doc(db, "alunos", alunoData.nome));
       alert("Aluno deletado do Firestore!");
     } catch (error) {
       console.error("Erro ao deletar aluno do Firestore:", error);
@@ -585,17 +581,23 @@ export default function Application({
               <select
                 id="turma-aluno"
                 value={alunoData.turma}
-                onChange={(e) =>
-                  setAlunoData({ ...alunoData, turma: e.target.value })
-                }
+                onChange={(e) => {
+                  setAlunoData({ ...alunoData, turma: e.target.value });
+                  setNomeAluno("");
+                  fetchAlunos(e.target.value);
+                }}
                 className="bg-slate-100 rounded p-1 text-lg text-black placeholder:text-black/40 w-8/12"
               >
-                <option disabled> - </option>
+                <option disabled defaultChecked>
+                  {" "}
+                  -{" "}
+                </option>
                 {turmas.map((turma, index) => (
                   <option key={index} value={turma}>
                     {turma}
                   </option>
                 ))}
+                <option value="">SEM TURMA</option>
               </select>
             </div>
           </div>
