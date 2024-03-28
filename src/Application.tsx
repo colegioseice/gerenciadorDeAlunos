@@ -1,10 +1,12 @@
 import logo_seice from "./assets/logo_seice.png";
-import { Download, LogOut, Menu, Save, Search, Trash2 } from "lucide-react";
+// import { Download, LogOut, Menu, Save, Search, Trash2 } from "lucide-react";
+import { Download, LogOut, Menu, Save, Search } from "lucide-react";
 
 import defaultAlumnPhoto from "./assets/foto_default.jpg";
 import trequinhoPhoto from "./assets/trequinho.svg";
 import { FormEvent, useEffect, useState } from "react";
-import { db, collection, addDoc, getDocs, doc, deleteDoc } from "./firebase";
+// import { db, collection, addDoc, getDocs, doc, deleteDoc } from "./firebase";
+import { db, collection, addDoc, getDocs } from "./firebase";
 import { DocumentData, updateDoc } from "firebase/firestore";
 
 interface Aluno {
@@ -466,16 +468,16 @@ export default function Application({
     }
   }
 
-  async function deleteAlumn(e?: FormEvent) {
-    e && e.preventDefault();
-    try {
-      await deleteDoc(doc(db, "alunos", alunoData.nome));
-      alert("Aluno deletado do Firestore!");
-    } catch (error) {
-      console.error("Erro ao deletar aluno do Firestore:", error);
-      alert("Erro ao deletar aluno do Firestore!");
-    }
-  }
+  // async function deleteAlumn(e?: FormEvent) {
+  //   e && e.preventDefault();
+  //   try {
+  //     await deleteDoc(doc(db, "alunos", alunoData.nome));
+  //     alert("Aluno deletado do Firestore!");
+  //   } catch (error) {
+  //     console.error("Erro ao deletar aluno do Firestore:", error);
+  //     alert("Erro ao deletar aluno do Firestore!");
+  //   }
+  // }
   function imprimir() {
     // Exiba uma mensagem para o usuário sobre como ajustar a escala de impressão
     alert(
@@ -1399,12 +1401,12 @@ export default function Application({
           >
             <Save /> <span className="flex-1">Salvar</span>
           </button>
-          <button
+          {/* <button
             className="text-white bg-red-500 w-10/12 p-1 rounded flex items-center justify-between"
             onClick={deleteAlumn}
           >
             <Trash2 /> <span className="flex-1">Deletar</span>
-          </button>
+          </button> */}
           <button
             className="text-white bg-blue-500 w-10/12 p-1 rounded flex items-center justify-between"
             onClick={imprimir}
