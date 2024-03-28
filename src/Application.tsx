@@ -1458,6 +1458,7 @@ export default function Application({
           className="p-1 border-0"
           name={name}
           id={id}
+          // @ts-expect-error - TSCONVERSION
           value={alunoData.aspectosAvaliados[bimestre][tipo]}
           onChange={(e) => {
             setAlunoData({
@@ -1465,6 +1466,7 @@ export default function Application({
               aspectosAvaliados: {
                 ...alunoData.aspectosAvaliados,
                 [bimestre]: {
+                  // @ts-expect-error - TSCONVERSION
                   ...alunoData.aspectosAvaliados[bimestre],
                   [tipo]: e.target.value,
                 },
@@ -1493,6 +1495,7 @@ export default function Application({
           className="p-1 border-0"
           name={name}
           id={id}
+          // @ts-expect-error - TSCONVERSION
           value={alunoData.rendimentoAvaliacoes[bimestre][tipo]}
           onChange={(e) => {
             setAlunoData({
@@ -1500,6 +1503,7 @@ export default function Application({
               rendimentoAvaliacoes: {
                 ...alunoData.rendimentoAvaliacoes,
                 [bimestre]: {
+                  // @ts-expect-error - TSCONVERSION
                   ...alunoData.rendimentoAvaliacoes[bimestre],
                   [tipo]: e.target.value,
                 },
