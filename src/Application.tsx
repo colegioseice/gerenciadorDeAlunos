@@ -611,7 +611,7 @@ export default function Application({
               <input
                 type="text"
                 id="matricula-aluno"
-                maxLength={7}
+                maxLength={11}
                 pattern="[0-9]{7}"
                 autoComplete="off"
                 value={alunoData.matricula}
